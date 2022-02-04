@@ -280,7 +280,7 @@ sns = boto3.client("sns", region_name="us-east-1")
 response = sns.create_topic(Name="stockemail")
 topic_arn = response["TopicArn"]
 
-response = sns.subscribe(TopicArn=topic_arn, Protocol="email", Endpoint="yling12@uchicago.edu")
+response = sns.subscribe(TopicArn=topic_arn, Protocol="email", Endpoint="email")
 
 
 kinesis = boto3.client('kinesis', region_name='us-east-1')
@@ -351,7 +351,7 @@ for ssh in [ssh_producer, ssh_consumer]:
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(instance_dns[instance],
                 username = 'ec2-user',
-                key_filename='/Users/sagelim/Desktop/academics/chi/21:22/lsc/LargeScaleComputing_A21/in-class-activities/06_Streaming_Batch_Processing/6M_Kinesis/macs30123.pem')
+                key_filename='key.pem')
     
     with SCPClient(ssh.get_transport()) as scp:
         scp.put(code[instance])
@@ -374,7 +374,7 @@ else:
 
 ssh_consumer.close; ssh_producer.close()
 
-print("Connect to Consumer Instance by running: ssh -i \"macs30123.pem\" ec2-user@%s" % instance_dns[1])
+print("Connect to Consumer Instance by running: ssh -i \"key.pem\" ec2-user@%s" % instance_dns[1])
 
 
 ! python3 consumer.py
