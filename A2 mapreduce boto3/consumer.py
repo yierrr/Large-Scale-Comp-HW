@@ -17,7 +17,7 @@ sns = boto3.client("sns", region_name="us-east-1")
 response = sns.create_topic(Name="stockemail")
 topic_arn = response["TopicArn"]
 
-response = sns.subscribe(TopicArn=topic_arn, Protocol="email", Endpoint="yling12@uchicago.edu")
+response = sns.subscribe(TopicArn=topic_arn, Protocol="email", Endpoint="email")
 
 
 kinesis = boto3.client('kinesis', region_name='us-east-1')
